@@ -77,6 +77,18 @@ namespace MemoryGameLogic
 
         public void FlipCard(int i, int j)
         {
+            try
+            {
+                if (Board[i, j].Collected)
+                {
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Index is out of board!");
+                return;
+            }
+
             if (Board[i, j].Collected)
             {
                 Console.WriteLine("Please select hidden card!");
@@ -92,7 +104,11 @@ namespace MemoryGameLogic
                 return;
             }
 
-            if (_activeFlip.card.Id == Board[i, j].card.Id)
+            if (_activeFlipSpot[0] == i && _activeFlipSpot[1] == j)
+            {
+                Console.WriteLine("Dont be a smart ass!");
+            }
+            else if (_activeFlip.card.Id == Board[i, j].card.Id)
             {
                 Collected[^1] = _activeFlip.card;
                 RemoveCard(new[] {i, j}, _activeFlipSpot);
